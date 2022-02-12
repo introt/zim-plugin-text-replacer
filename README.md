@@ -46,3 +46,17 @@ Some common errors and how to fix them:
   * `invalid json object`: couldn't be loaded as a Python `dict`
   * `json contains invalid keys`: non-string keys (how?)
   * `json contains invalid values`: non-string values
+
+### System-wide alternatives
+
+#### Linux
+
+* [AutoKey](https://github.com/autokey/autokey) (GPL-3.0)
+
+#### MacOS
+
+* Settings > Keyboard > Text (built-in)
+
+#### Windows
+
+* [AutoHotkey](https://github.com/Lexikos/AutoHotkey_L) (GPL-2.0)
