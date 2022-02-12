@@ -22,7 +22,7 @@ To reload the json, toggle the plugin off and on again, or restart Zim.
 }
 ```
 
-The json file should contain a single object with key-value pairs; the key is replaced by the value when typing. The keys shouldn't contain whitespace, but the values can. The values can also contain wiki formatting, though it isn't rendered before reload.
+The json file should contain a single object with key-value pairs; the key is the string that will get replaced by the value. The keys shouldn't contain whitespace, but the values can. The values can also contain wiki formatting, though it isn't rendered before reload.
 
 #### Troubleshooting
 
@@ -32,8 +32,17 @@ You can check the logs to confirm your replacements were successfully loaded. Th
 INFO: Loaded n replacements from /your/replacements.json
 ```
 
-If there's an error, n will be 0 and the above will be preceded by the encountered error:
+If there's an error, n will be 0 and the above will be preceded by the encountered error.
 
 ```
-ERROR: Failed to load json from bad path: [Errno 2] No such file or directory: 'bad path'
+ERROR: Failed to load json from bad path: Error text here
 ```
+
+Some common errors and how to fix them:
+
+* `[Errno 2] No such file or directory: 'bad path'`: check the path; it should be a full, absolute path (eg. no `~` or `$HOME`)
+* Check your json if any of these show up:
+  * `Extra data: line n, column m, (char l)` (or `Expecting value: ...` etc): something's not json
+  * `invalid json object`: couldn't be loaded as a Python `dict`
+  * `json contains invalid keys`: non-string keys (how?)
+  * `json contains invalid values`: non-string values
