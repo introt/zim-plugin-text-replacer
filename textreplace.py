@@ -1,4 +1,5 @@
 from json import load
+from pathlib import Path
 
 from zim.plugins import PluginClass
 from zim.gui.pageview import PageViewExtension
@@ -20,7 +21,7 @@ With thanks to HorseLuvver and gandrille.
             }
 
     plugin_preferences = (
-            ('json_path', 'string', _('Path to text replacements dictionary json file'), ''),  # T: plugin preference
+            ('json_path', 'string', _('Path to text replacements dictionary json file'), '~/.local/share/zim/plugins/text_replacements.json'),  # T: plugin preference
         )
 
 
@@ -30,7 +31,7 @@ class TextReplacerPageViewExtension(PageViewExtension):
         self.replacements = {}
         path = self.plugin.preferences['json_path']
         try:
-            with open(path, 'r') as f:
+            with open(Path(path).expanduser(), 'r') as f:
                 json = load(f)
             assert type(json) == dict, 'invalid json object'
             assert all(type(key) == str for key in json.keys()), 'json contains invalid keys'

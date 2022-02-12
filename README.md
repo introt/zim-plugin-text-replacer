@@ -5,8 +5,10 @@ A barebones "Custom autocorrect"/text replacement plugin for Zim.
 ### How to use
 
 1. Move `textreplacer.py` into the plugins folder
-2. Create your replacements json (see `example.json` for reference) and copy its full path
-2. Enable the plugin in Zim and click "Configure"
+2. Create your replacements json and copy its full path
+	* see `example.json` for reference
+	* on Linux, moving `example.json` to `~/.local/share/zim/plugins/text_replacements.json` is enough to get going; you can skip the rest of the steps
+3. Enable the plugin in Zim and click "Configure"
 4. Paste in the path from step 2 and click "OK"
 
 From now on, every time you type one of the words you specified it will get replaced with the replacement you've chosen; this can be undone via undo (Ctrl+Z).
@@ -40,12 +42,13 @@ ERROR: Failed to load json from bad path: Error text here
 
 Some common errors and how to fix them:
 
-* `[Errno 2] No such file or directory: 'bad path'`: check the path; it should be a full, absolute path (eg. no `~` or `$HOME`)
+* `[Errno 2] No such file or directory: 'bad path'`: check the path; aside from `~` and `~user` constructs you should use an absolute path (see [pathlib.Path](https://docs.python.org/3/library/pathlib.html#pathlib.Path) for more information)
 * Check your json if any of these show up:
   * `Extra data: line n, column m, (char l)` (or `Expecting value: ...` etc): something's not json
   * `invalid json object`: couldn't be loaded as a Python `dict`
   * `json contains invalid keys`: non-string keys (how?)
   * `json contains invalid values`: non-string values
+  * For more information, see the [Python json library docs](https://docs.python.org/3/library/json.html)
 
 ### System-wide alternatives
 
