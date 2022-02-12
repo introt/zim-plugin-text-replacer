@@ -31,12 +31,16 @@ class TextReplacerPageViewExtension(PageViewExtension):
         path = self.plugin.preferences['json_path']
         try:
             with open(path, 'r') as f:
-                self.replacements = load(f)
+                json = load(f)
+            assert type(json) == dict, 'invalid json object'
+            assert all(type(key) == str for key in json.keys()), 'json contains invalid keys'
+            assert all(type(val) == str for val in json.values()), 'json contains invalid values'
+            self.replacements = json
+            self.connectto(pageview.textview, 'end-of-word', self.on_end_of_word)
         except Exception as e:
             logger.error('Failed to load json from %s: %s', path, e)
         finally:
             logger.info('Loaded %s replacements from %s', len(self.replacements.keys()), path)
-            self.connectto(pageview.textview, 'end-of-word', self.on_end_of_word)
 
     def on_end_of_word(self, textview, start, end, word, char, editmode):
         buffer = textview.get_buffer()
