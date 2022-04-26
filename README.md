@@ -2,6 +2,8 @@
 
 A barebones "Custom autocorrect"/text replacement plugin for Zim.
 
+Edit: now there's two of 'em! `inserttext.py` works like the Symbol list plugin, and doesn't require you to write a json
+
 ### How to use
 
 1. Move `textreplacer.py` into the plugins folder
